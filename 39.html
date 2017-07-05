@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//第一种，prototype的方式：
+		//父类 
+		function person(){ 
+		  this.hair = 'black'; 
+		  this.eye = 'black'; 
+		  this.skin = 'yellow'; 
+		  this.view = function(){ 
+		    return this.hair + ',' + this.eye + ',' + this.skin; 
+		  } 
+		} 
+		 
+		//子类 
+		function man(){ 
+		  this.feature = ['beard','strong']; 
+		} 
+		 
+		man.prototype = new person(); 
+		var one = new man(); 
+		 
+		console.log(one.feature); //['beard','strong'] 
+		console.log(one.hair); //black 
+		console.log(one.eye); //black 
+		console.log(one.skin); //yellow 
+		console.log(one.view()); //black,black,yellow 
+		//第二种，apply的方式：
+		//父类 
+		function person(){ 
+		  this.hair = 'black'; 
+		  this.eye = 'black'; 
+		  this.skin = 'yellow'; 
+		  this.view = function(){ 
+		    return this.hair + ',' + this.eye + ',' + this.skin; 
+		  } 
+		} 
+		 
+		//子类 
+		function man(){ 
+		  // person.apply(this,new Array()); 
+		  person.apply(this,[]); 
+		  this.feature = ['beard','strong']; 
+		} 
+		 
+		var one = new man(); 
+		 
+		console.log(one.feature); //['beard','strong'] 
+		console.log(one.hair); //black 
+		console.log(one.eye); //black 
+		console.log(one.skin); //yellow 
+		console.log(one.view()); //black,black,yellow
+		//第三种，call+prototype的方式：
+		 //父类 
+		function person(){ 
+		  this.hair = 'black'; 
+		  this.eye = 'black'; 
+		  this.skin = 'yellow'; 
+		  this.view = function(){ 
+		    return this.hair + ',' + this.eye + ',' + this.skin; 
+		  } 
+		} 
+		 
+		//子类 
+		function man(){ 
+		  // person.apply(this,new Array()); 
+		  person.call(this,[]); 
+		  this.feature = ['beard','strong']; 
+		} 
+		 
+		man.prototype = new person(); 
+		var one = new man(); 
+		 
+		console.log(one.feature); //['beard','strong'] 
+		console.log(one.hair); //black 
+		console.log(one.eye); //black 
+		console.log(one.skin); //yellow 
+		console.log(one.view()); //black,black,yellow 
+
+	</script>
+</body>
+</html>
